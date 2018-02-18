@@ -1,0 +1,9 @@
+.DS_Store
+.serverless
+
+node_modules
+public
+server/build
+
+package-lock.json
+npm-debug.log

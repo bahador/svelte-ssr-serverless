@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "build": "npm run build:server && npm run build:client",
+    "build:client": "npx rollup -c rollup.config.client.js",
+    "build:dev": "npm run build:server -- -w && npm run build:client -- -w",
+    "build:server": "npx rollup -c rollup.config.server.js",
+    "clean": "rm -rf public server/build",
+    "serve": "node index.js",
+    "start": "npm run build:all && npm run serve"
+  },
+  "dependencies": {
+    "serverless": "^1.26.0"
+  },
+  "devDependencies": {
+    "rollup": "^0.56.1",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.2",
+    "rollup-plugin-svelte": "^4.0.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "svelte": "^1.55.0"
+  }
+}
