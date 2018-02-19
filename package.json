@@ -1,22 +1,32 @@
 {
   "scripts": {
-    "build": "npm run build:server && npm run build:client",
-    "build:client": "npx rollup -c rollup.config.client.js",
-    "build:dev": "npm run build:server -- -w && npm run build:client -- -w",
+    "build:all": "npm run build:app:server && npm run build:app:client && npm run build:server",
+    "build:app:client": "npx rollup -c rollup.config.app.client.js",
+    "build:app:server": "npx rollup -c rollup.config.app.server.js",
+    "build:dev": "npm run build:app:server -- -w && npm run build:app:client -- -w && npm run build:server -- -w ",
     "build:server": "npx rollup -c rollup.config.server.js",
+    "deploy:server": "npx serverless deploy",
     "clean": "rm -rf public server/build",
-    "serve": "node index.js",
+    "serve": "npx serverless offline start",
     "start": "npm run build:all && npm run serve"
   },
   "dependencies": {
-    "serverless": "^1.26.0"
+    "babel-preset-koa": "^1.0.0",
+    "koa": "^2.5.0",
+    "serverless-http": "^1.5.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-koa": "^1.0.0",
     "rollup": "^0.56.1",
+    "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-node-resolve": "^3.0.2",
     "rollup-plugin-svelte": "^4.0.0",
     "rollup-plugin-uglify": "^3.0.0",
+    "serverless": "^1.26.0",
+    "serverless-offline": "^3.18.0",
     "svelte": "^1.55.0"
   }
 }

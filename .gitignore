@@ -1,5 +1,6 @@
 .DS_Store
 .serverless
+.vscode
 
 node_modules
 public

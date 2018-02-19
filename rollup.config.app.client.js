@@ -1,3 +1,4 @@
+import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
@@ -15,7 +16,10 @@ export default {
 		// sourcemap: true
 	},
 	plugins: [
-	    commonjs(), // converts date-fns to ES modules
+	    babel({
+	      exclude: ['node_modules/**', '**/*.html']
+	    }),
+    	commonjs(), // converts date-fns to ES modules
 	    resolve(), // tells Rollup how to find date-fns in node_modules
 		svelte({
 			css: false, // already present on page
