@@ -1,23 +1,26 @@
-'use strict';
+require('@std/esm');
+require('svelte/ssr/register');
 
-const Koa = require('koa');
+const { createHistory } = require('../../router/index');
+const app = require('../../shared/App.html');
 const serverless = require('serverless-http');
+const history = createHistory('memory');
+const Koa = require('koa');
+const server = new Koa();
+const route = require('koa-route');
 
-var server = module.exports = new Koa();
-
-const path = require( 'path' );
-const fs = require( 'fs' );
-
-const app = require( './app.js' );
-const template = fs.readFileSync( path.join( __dirname, '../templates/index.html' ), 'utf-8' );
+server.use(route.get('/foo', (ctx) => { ctx.body = "bar"; }));
 
 server.use(async function(ctx) {
-	const match = /\/page\/(\d+)/.exec( ctx.url );
-	const page = match ? +match[1] : 1;
+  history.replace(ctx.url);
 
-	const html = app.render({ page: page });
-	ctx.body = template.replace( '<!-- HTML -->', html );
-	ctx.type = 'html';
+  ctx.body = `
+    <!DOCTYPE html>
+    <link rel="stylesheet" href="/styles.css">
+    <div id="app">${app.render()}</div>
+    <script src="/bundle.js"></script>
+  `;
+  ctx.type = 'html';
 });
 
 module.exports.handler = serverless(server);

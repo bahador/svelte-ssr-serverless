@@ -1,70 +1,21 @@
-<h1>Page {{page}}</h1>
+<nav>
+  <NavLink exact to="/">home</NavLink>
+  <NavLink to="/about">about</NavLink>
+</nav>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<div class='interactive'>
-	{{#if loading}}
-		<p>loading...</p>
-	{{else}}
-		<button on:click='showAlert()'>click me</button>
-	{{/if}}
-</div>
-
-<Nested page='{{page}}'/>
-
-<style>
-	h1 {
-		font-family: 'Helvetica Neue';
-		font-size: 2em;
-		font-weight: 200;
-	}
-
-	p {
-		max-width: 40em;
-		font-family: 'Helvetica Neue';
-	}
-
-	.interactive {
-		background-color: #eee;
-		height: 4em;
-		padding: 1em;
-		box-sizing: border-box;
-		text-align: center;
-		font-family: 'Helvetica Neue';
-		font-weight: 900;
-	}
-
-	.interactive p {
-		margin: 0;
-	}
-
-	button {
-		font-family: inherit;
-		font-size: inherit;
-	}
-</style>
+<Route exact path="/"><Home/></Route>
+<Route path="/about" component={{About}}/>
 
 <script>
-	import Nested from './Nested.html';
+import NavLink from '../router/NavLink.html';
+import Route from '../router/Route.html';
+import Home from './components/Home.html';
+import About from './components/About.html';
 
-	export default {
-		data () {
-			return {
-				query: '???',
-				loading: true
-			};
-		},
-
-		components: {
-			Nested
-		},
-
-		methods: {
-			showAlert () {
-				alert( 'the page is now interactive' );
-			}
-		}
-	}
+export default {
+  components: { NavLink, Route, Home },
+  data () {
+    return { About };
+  }
+};
 </script>
