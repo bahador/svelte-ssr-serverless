@@ -25,7 +25,7 @@ export default {
 			css: function (css) {
 		        // creates `main.css` and `main.css.map` — pass `false`
 		        // as the second argument if you don't want the sourcemap
-		        css.write('public/build/main.css');
+		        css.write('public/build/styles.css');
 	        },
 			generate: 'ssr'
 		}),

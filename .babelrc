@@ -1,8 +1,0 @@
-{
-  "presets": [
-    [
-	    "koa"
-	]
-  ],
-  "plugins": ["external-helpers"]
-}
